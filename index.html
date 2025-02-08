@@ -2,9 +2,8 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React</title>
+    <title>When2Meet Clone</title>
     <style>
       /* General styles */
       body {
@@ -26,60 +25,110 @@
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
       }
 
-      /* Rectangle box styles */
-      .week-container {
-        display: flex;
-        justify-content: space-around;
-        background: linear-gradient(135deg, #a1c4fd, #c2e9fb);
+      /* Main container */
+      .container {
         padding: 20px;
-        margin: 20px;
-        border-radius: 10px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        max-width: 1200px;
+        margin: 0 auto;
       }
 
-      .day-column {
-        background: white;
-        padding: 15px;
-        border-radius: 8px;
+      /* Grid for days and time slots */
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(8, 1fr); /* 7 days + 1 time column */
+        gap: 5px;
+      }
+
+      /* Grid header (days of the week) */
+      .grid-header {
+        background: linear-gradient(135deg, #a1c4fd, #c2e9fb);
+        padding: 10px;
         text-align: center;
-        flex: 1;
-        margin: 0 10px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        font-weight: bold;
+        border-radius: 5px;
+        color: #555;
       }
 
-      .day-column h3 {
-        margin: 0;
-        font-size: 1.2rem;
+      /* Time slots */
+      .time-slot {
+        background: #fff;
+        padding: 10px;
+        text-align: center;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background 0.3s ease;
+      }
+
+      .time-slot.selected {
+        background: #a1c4fd; /* Pastel blue for selected slots */
+      }
+
+      .time-slot:hover {
+        background: #f0f0f0;
+      }
+
+      /* Time column */
+      .time-column {
+        background: #f9f9f9;
+        padding: 10px;
+        text-align: center;
+        font-weight: bold;
         color: #555;
       }
     </style>
   </head>
   <body>
-    <header>Let's Hangout</header>
-    <div id="root"></div>
-    <div class="week-container">
-      <div class="day-column">
-        <h3>Monday</h3>
-      </div>
-      <div class="day-column">
-        <h3>Tuesday</h3>
-      </div>
-      <div class="day-column">
-        <h3>Wednesday</h3>
-      </div>
-      <div class="day-column">
-        <h3>Thursday</h3>
-      </div>
-      <div class="day-column">
-        <h3>Friday</h3>
-      </div>
-      <div class="day-column">
-        <h3>Saturday</h3>
-      </div>
-      <div class="day-column">
-        <h3>Sunday</h3>
+    <header>When2Meet Clone</header>
+    <div class="container">
+      <div class="grid">
+        <!-- Time column -->
+        <div class="time-column">Time</div>
+        <!-- Days of the week -->
+        <div class="grid-header">Monday</div>
+        <div class="grid-header">Tuesday</div>
+        <div class="grid-header">Wednesday</div>
+        <div class="grid-header">Thursday</div>
+        <div class="grid-header">Friday</div>
+        <div class="grid-header">Saturday</div>
+        <div class="grid-header">Sunday</div>
+
+        <!-- Time slots -->
+        <!-- Example: 9:00 AM to 5:00 PM -->
+        <script>
+          const times = [
+            "9:00 AM",
+            "10:00 AM",
+            "11:00 AM",
+            "12:00 PM",
+            "1:00 PM",
+            "2:00 PM",
+            "3:00 PM",
+            "4:00 PM",
+            "5:00 PM",
+          ];
+
+          times.forEach((time) => {
+            document.write(`<div class="time-column">${time}</div>`);
+            for (let i = 0; i < 7; i++) {
+              document.write(
+                `<div class="time-slot" data-day="${i}" data-time="${time}"></div>`
+              );
+            }
+          });
+        </script>
       </div>
     </div>
-    <script type="module" src="/src/main.jsx"></script>
+
+    <script>
+      // JavaScript for selecting/deselecting time slots
+      const timeSlots = document.querySelectorAll(".time-slot");
+
+      timeSlots.forEach((slot) => {
+        slot.addEventListener("click", () => {
+          slot.classList.toggle("selected");
+        });
+      });
+    </script>
   </body>
 </html>
