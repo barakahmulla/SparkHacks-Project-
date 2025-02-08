@@ -5,52 +5,199 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Welcome to When2Meet Clone</title>
     <style>
+        /* General styles */
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-color: #f9f9f9;
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4, #a1c4fd, #c2e9fb);
+            background-size: 400% 400%;
+            animation: gradientBG 10s ease infinite;
+            overflow: hidden;
         }
+
+        @keyframes gradientBG {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        /* Welcome container */
         .welcome-container {
             text-align: center;
-            background: white;
+            background: rgba(255, 255, 255, 0.9);
             padding: 40px;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 20px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 2s ease-in-out;
+            position: relative;
+            z-index: 2;
         }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Title */
         h1 {
-            font-size: 2.5rem;
-            color: #333;
+            font-size: 3rem;
+            color: #ff6f61;
+            margin-bottom: 20px;
+            animation: bounce 2s infinite;
         }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        /* Subtitle */
         p {
-            font-size: 1.2rem;
+            font-size: 1.5rem;
             color: #555;
             margin: 20px 0;
+            animation: slideIn 1.5s ease-in-out;
         }
+
+        @keyframes slideIn {
+            0% {
+                opacity: 0;
+                transform: translateX(-100%);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Start button */
         .start-button {
-            padding: 10px 20px;
-            font-size: 1rem;
+            padding: 15px 30px;
+            font-size: 1.2rem;
             color: white;
-            background-color: #ff9a9e;
+            background-color: #ff6f61;
             border: none;
-            border-radius: 5px;
+            border-radius: 30px;
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            animation: pulse 2s infinite;
         }
+
         .start-button:hover {
-            background-color: #ff7a7e;
+            background-color: #ff4a3d;
+            transform: scale(1.1);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        /* Background decorations */
+        .background-deco {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .background-deco div {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            animation: float 5s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-20px) rotate(180deg);
+            }
+            100% {
+                transform: translateY(0) rotate(360deg);
+            }
+        }
+
+        .background-deco div:nth-child(1) {
+            top: 10%;
+            left: 20%;
+            animation-duration: 6s;
+        }
+
+        .background-deco div:nth-child(2) {
+            top: 30%;
+            left: 70%;
+            animation-duration: 8s;
+        }
+
+        .background-deco div:nth-child(3) {
+            top: 50%;
+            left: 40%;
+            animation-duration: 7s;
+        }
+
+        .background-deco div:nth-child(4) {
+            top: 70%;
+            left: 10%;
+            animation-duration: 9s;
+        }
+
+        .background-deco div:nth-child(5) {
+            top: 80%;
+            left: 60%;
+            animation-duration: 10s;
         }
     </style>
 </head>
 <body>
+    <!-- Background decorations -->
+    <div class="background-deco">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+
+    <!-- Welcome container -->
     <div class="welcome-container">
         <h1>Let's Hangout!</h1>
         <p>Plan your meetings and hangouts with ease</p>
-         <button class="start-button" onclick="window.location.href='main.html'">Get Started</button> 
+        <button class="start-button" onclick="window.location.href='main.html'">Get Started</button>
     </div>
 </body>
-</html>i
+</html>
