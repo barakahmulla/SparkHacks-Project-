@@ -36,12 +36,14 @@
         .welcome-container {
             text-align: center;
             background: rgba(255, 255, 255, 0.9);
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            padding: 60px;
+            border-radius: 30px;
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
             animation: fadeIn 2s ease-in-out;
             position: relative;
             z-index: 2;
+            max-width: 800px;
+            width: 90%;
         }
 
         @keyframes fadeIn {
@@ -57,7 +59,7 @@
 
         /* Title */
         h1 {
-            font-size: 3rem;
+            font-size: 4rem;
             color: #ff6f61;
             margin-bottom: 20px;
             animation: bounce 2s infinite;
@@ -74,7 +76,7 @@
 
         /* Subtitle */
         p {
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             color: #555;
             margin: 20px 0;
             animation: slideIn 1.5s ease-in-out;
@@ -93,22 +95,22 @@
 
         /* Start button */
         .start-button {
-            padding: 15px 30px;
-            font-size: 1.2rem;
+            padding: 20px 40px;
+            font-size: 1.5rem;
             color: white;
             background-color: #ff6f61;
             border: none;
-            border-radius: 30px;
+            border-radius: 50px;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
             animation: pulse 2s infinite;
         }
 
         .start-button:hover {
             background-color: #ff4a3d;
             transform: scale(1.1);
-            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
         }
 
         @keyframes pulse {
@@ -120,24 +122,15 @@
             }
         }
 
-        /* Background decorations */
-        .background-deco {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
-            overflow: hidden;
-        }
 
-        .background-deco div {
+        /* Animated illustrations */
+        .illustration {
             position: absolute;
-            width: 20px;
-            height: 20px;
+            width: 150px;
+            height: 150px;
             background: rgba(255, 255, 255, 0.5);
             border-radius: 50%;
-            animation: float 5s infinite ease-in-out;
+            animation: float 6s infinite ease-in-out;
         }
 
         @keyframes float {
@@ -152,31 +145,75 @@
             }
         }
 
-        .background-deco div:nth-child(1) {
+        .illustration:nth-child(1) {
+            top: 10%;
+            left: 10%;
+            animation-duration: 8s;
+        }
+
+        .illustration:nth-child(2) {
+            top: 20%;
+            right: 15%;
+            animation-duration: 10s;
+        }
+
+        .illustration:nth-child(3) {
+            bottom: 15%;
+            left: 20%;
+            animation-duration: 7s;
+        }
+
+        .illustration:nth-child(4) {
+            bottom: 10%;
+            right: 10%;
+            animation-duration: 9s;
+        }
+
+        /* Particle background */
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .particles span {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            animation: float 5s infinite ease-in-out;
+        }
+
+        .particles span:nth-child(1) {
             top: 10%;
             left: 20%;
             animation-duration: 6s;
         }
 
-        .background-deco div:nth-child(2) {
+        .particles span:nth-child(2) {
             top: 30%;
             left: 70%;
             animation-duration: 8s;
         }
 
-        .background-deco div:nth-child(3) {
+        .particles span:nth-child(3) {
             top: 50%;
             left: 40%;
             animation-duration: 7s;
         }
 
-        .background-deco div:nth-child(4) {
+        .particles span:nth-child(4) {
             top: 70%;
             left: 10%;
             animation-duration: 9s;
         }
 
-        .background-deco div:nth-child(5) {
+        .particles span:nth-child(5) {
             top: 80%;
             left: 60%;
             animation-duration: 10s;
@@ -184,14 +221,21 @@
     </style>
 </head>
 <body>
-    <!-- Background decorations -->
-    <div class="background-deco">
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
+    <!-- Particle background -->
+    <div class="particles">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
     </div>
+
+
+    <!-- Animated illustrations -->
+    <div class="illustration"></div>
+    <div class="illustration"></div>
+    <div class="illustration"></div>
+    <div class="illustration"></div>
 
     <!-- Welcome container -->
     <div class="welcome-container">

@@ -43,6 +43,7 @@
             cursor: pointer;
             transition: all 0.3s ease;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            z-index: 2;
         }
 
         #back-button:hover {
@@ -60,6 +61,8 @@
             font-size: 2rem;
             font-weight: bold;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 2;
         }
 
         /* Main container */
@@ -70,6 +73,8 @@
             background: rgba(255, 255, 255, 0.9);
             border-radius: 20px;
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            position: relative;
+            z-index: 2;
         }
 
         /* Grid for days and time slots */
@@ -147,8 +152,8 @@
             box-shadow: 0 6px 8px rgba(0, 0, 0, 0.3);
         }
 
-        /* Background decorations */
-        .background-deco {
+        /* Particle background */
+        .particles {
             position: absolute;
             top: 0;
             left: 0;
@@ -158,52 +163,40 @@
             overflow: hidden;
         }
 
-        .background-deco div {
+        .particles span {
             position: absolute;
-            width: 20px;
-            height: 20px;
+            width: 10px;
+            height: 10px;
             background: rgba(255, 255, 255, 0.5);
             border-radius: 50%;
             animation: float 5s infinite ease-in-out;
         }
 
-        @keyframes float {
-            0% {
-                transform: translateY(0) rotate(0deg);
-            }
-            50% {
-                transform: translateY(-20px) rotate(180deg);
-            }
-            100% {
-                transform: translateY(0) rotate(360deg);
-            }
-        }
-
-        .background-deco div:nth-child(1) {
+        .particles span:nth-child(1) {
             top: 10%;
             left: 20%;
             animation-duration: 6s;
         }
 
-        .background-deco div:nth-child(2) {
+        .particles span:nth-child(2) {
             top: 30%;
             left: 70%;
             animation-duration: 8s;
         }
 
-        .background-deco div:nth-child(3) {
+        .particles span:nth-child(3) {
             top: 50%;
             left: 40%;
             animation-duration: 7s;
         }
 
-        .background-deco div:nth-child(4) {
+        .particles span:nth-child(4) {
             top: 70%;
             left: 10%;
             animation-duration: 9s;
         }
 
-        .background-deco div:nth-child(5) {
+        .particles span:nth-child(5) {
             top: 80%;
             left: 60%;
             animation-duration: 10s;
@@ -211,17 +204,22 @@
     </style>
   </head>
   <body>
-    <!-- Background decorations -->
-    <div class="background-deco">
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
+    <!-- Particle background -->
+    <div class="particles">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
     </div>
 
+    <!-- Back button -->
     <button id="back-button" onclick="window.location.href='index.html'">Back to Welcome</button>
-    <header>When2Meet Clone</header>
+
+    <!-- Header -->
+    <header>Let's Hangout!</header>
+
+    <!-- Main container -->
     <div class="container">
       <div class="grid">
         <!-- Time column -->
@@ -297,16 +295,8 @@
             time: slot.getAttribute("data-time"),
           }));
 
-        fetch("/api/save-availability", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(selectedSlots),
-        })
-          .then((response) => response.json())
-          .then((data) => console.log(data))
-          .catch((error) => console.error("Error:", error));
+        console.log("Selected Slots:", selectedSlots); // Log selected slots to the console
+        alert("Availability saved! Check the console for details.");
       };
 
       // Add event listener to the save button
