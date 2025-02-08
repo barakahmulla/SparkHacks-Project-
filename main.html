@@ -14,7 +14,7 @@
             background-size: 400% 400%;
             animation: gradientBG 10s ease infinite;
             color: #333;
-            overflow: hidden;
+            /* Remove overflow: hidden to allow scrolling */
         }
 
         @keyframes gradientBG {
@@ -31,7 +31,7 @@
 
         /* Back button */
         #back-button {
-            position: absolute;
+            position: fixed; /* Fixed position to stay visible while scrolling */
             top: 20px;
             left: 20px;
             padding: 10px 20px;
@@ -65,16 +65,39 @@
             z-index: 2;
         }
 
+        /* Subheader styles */
+        .subheader {
+            text-align: center;
+            color: #555;
+            font-size: 1.2rem;
+            margin: 10px 0;
+            padding: 0 20px;
+            animation: slideIn 1.5s ease-in-out;
+        }
+
+        @keyframes slideIn {
+            0% {
+                opacity: 0;
+                transform: translateX(-100%);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
         /* Main container */
         .container {
             padding: 20px;
             max-width: 1200px;
-            margin: 0 auto;
+            margin: 20px auto; /* Add margin to separate from header */
             background: rgba(255, 255, 255, 0.9);
             border-radius: 20px;
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
             position: relative;
             z-index: 2;
+            max-height: 70vh; /* Limit height to allow scrolling */
+            overflow-y: auto; /* Enable vertical scrolling */
         }
 
         /* Grid for days and time slots */
@@ -219,6 +242,11 @@
     <!-- Header -->
     <header>Let's Hangout!</header>
 
+    <!-- Subheader with directions -->
+    <div class="subheader">
+        <p>Click on the time slots to select your availability. When you're done, click "Save Availability" to save your schedule.</p>
+    </div>
+
     <!-- Main container -->
     <div class="container">
       <div class="grid">
@@ -234,9 +262,11 @@
         <div class="grid-header">Sunday</div>
 
         <!-- Time slots -->
-        <!-- Example: 9:00 AM to 5:00 PM -->
+        <!-- Example: 7:00 AM to 12:00 AM -->
         <script>
           const times = [
+            "7:00 AM",
+            "8:00 AM",
             "9:00 AM",
             "10:00 AM",
             "11:00 AM",
@@ -246,6 +276,13 @@
             "3:00 PM",
             "4:00 PM",
             "5:00 PM",
+            "6:00 PM",
+            "7:00 PM",
+            "8:00 PM",
+            "9:00 PM",
+            "10:00 PM",
+            "11:00 PM",
+            "12:00 AM",
           ];
 
           times.forEach((time) => {
