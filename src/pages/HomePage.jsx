@@ -1,26 +1,57 @@
-// src/pages/HomePage.js
+// src/pages/HangoutPage.jsx
 import { useState } from 'react';
-import ScheduleForm from '../components/ScheduleForm';
+import Popup from '../components/Popup';
 
-function HomePage({ addSchedule }) {
-  const [schedules, setSchedules] = useState([]);
+function HangoutPage({ schedules }) {
+  const [isOpen, setIsOpen] = useState(false);
+  const [editIndex, setEditIndex] = useState(null);
+  const [editedSchedule, setEditedSchedule] = useState({ time: '', event: '' });
+
+  const deleteSchedule = (index) => {
+    const newSchedules = schedules.filter((_, i) => i !== index);
+    setSchedules(newSchedules);
+  };
+
+  const editSchedule = (index) => {
+    setEditIndex(index);
+    setEditedSchedule(schedules[index]);
+    setIsOpen(true);
+  };
+
+  const saveEditedSchedule = () => {
+    const newSchedules = [...schedules];
+    newSchedules[editIndex] = editedSchedule;
+    setSchedules(newSchedules);
+    setIsOpen(false);
+  };
 
   return (
     <div>
-      <h1>Your Schedule</h1>
-      <ScheduleForm addSchedule={addSchedule} />
-      <div>
-        <h2>My Schedule</h2>
-        <ul>
-          {schedules.map((schedule, index) => (
-            <li key={index}>
-              {schedule.time} - {schedule.event}
-            </li>
-          ))}
-        </ul>
-      </div>
+      <button onClick={() => setIsOpen(true)}>View Schedules</button>
+      <Popup
+        schedules={schedules}
+        isOpen={isOpen}
+        closeModal={() => setIsOpen(false)}
+        deleteSchedule={deleteSchedule}
+        editSchedule={editSchedule}
+      />
+      {editIndex !== null && (
+        <div>
+          <input
+            type="time"
+            value={editedSchedule.time}
+            onChange={(e) => setEditedSchedule({ ...editedSchedule, time: e.target.value })}
+          />
+          <input
+            type="text"
+            value={editedSchedule.event}
+            onChange={(e) => setEditedSchedule({ ...editedSchedule, event: e.target.value })}
+          />
+          <button onClick={saveEditedSchedule}>Save</button>
+        </div>
+      )}
     </div>
   );
 }
 
-export default HomePage;
+export default HangoutPage;
