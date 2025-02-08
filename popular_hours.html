@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Popular Hours</title>
+    <style>
+        /* Your existing CSS */
+    </style>
+</head>
+<body>
+    <div class="welcome-container">
+        <h1>Most Popular Hours</h1>
+        <ul>
+            {% for day, time in popular_hours.items() %}
+            <li>{{ day }}: {{ time }}</li>
+            {% endfor %}
+        </ul>
+        <button class="start-button" onclick="window.location.href='{main.html}';">Back to Main</button>
+    </div>
+</body>
+</html>
