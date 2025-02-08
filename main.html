@@ -296,7 +296,7 @@
         </script>
       </div>
       <!-- Counter display -->
-      <div class="counter">Days Selected: <span id="days-selected">0</span></div>
+      <div class="counter">Times Selected: <span id="Times-selected">0</span></div>
       <!-- Save button -->
       <button id="save-button">Save Availability</button>
     </div>
@@ -305,7 +305,7 @@
       // JavaScript for selecting/deselecting time slots
       const timeSlots = document.querySelectorAll(".time-slot");
       let daysSelected = 0; // Counter for selected days
-      const daysSelectedDisplay = document.getElementById("days-selected");
+      const daysSelectedDisplay = document.getElementById("Times-selected");
 
       timeSlots.forEach((slot) => {
         slot.addEventListener("click", () => {
