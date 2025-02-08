@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-     <meta charset="UTF-8" />
+    <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>When2Meet Clone</title>
     <style>
@@ -76,6 +76,33 @@
         font-weight: bold;
         color: #555;
       }
+
+      /* Counter display */
+      .counter {
+        margin-top: 20px;
+        text-align: center;
+        font-size: 1.2rem;
+        font-weight: bold;
+        color: #555;
+      }
+
+      /* Save button styles */
+      #save-button {
+        display: block;
+        margin: 20px auto;
+        padding: 10px 20px;
+        background: #ff9a9e;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 1rem;
+        transition: background 0.3s ease;
+      }
+
+      #save-button:hover {
+        background: #ff7a7e;
+      }
     </style>
   </head>
   <body>
@@ -118,17 +145,57 @@
           });
         </script>
       </div>
+      <!-- Counter display -->
+      <div class="counter">Days Selected: <span id="days-selected">0</span></div>
+      <!-- Save button -->
+      <button id="save-button">Save Availability</button>
     </div>
 
     <script>
       // JavaScript for selecting/deselecting time slots
       const timeSlots = document.querySelectorAll(".time-slot");
+      let daysSelected = 0; // Counter for selected days
+      const daysSelectedDisplay = document.getElementById("days-selected");
 
       timeSlots.forEach((slot) => {
         slot.addEventListener("click", () => {
-          slot.classList.toggle("selected");
+          const isSelected = slot.classList.toggle("selected");
+
+          // Update the counter
+          if (isSelected) {
+            daysSelected++;
+          } else {
+            daysSelected--;
+          }
+
+          // Update the display
+          daysSelectedDisplay.textContent = daysSelected;
         });
       });
+
+      // Function to send data to the backend
+      const sendDataToBackend = () => {
+        const selectedSlots = Array.from(timeSlots)
+          .filter((slot) => slot.classList.contains("selected"))
+          .map((slot) => ({
+            day: slot.getAttribute("data-day"),
+            time: slot.getAttribute("data-time"),
+          }));
+
+        fetch("/api/save-availability", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(selectedSlots),
+        })
+          .then((response) => response.json())
+          .then((data) => console.log(data))
+          .catch((error) => console.error("Error:", error));
+      };
+
+      // Add event listener to the save button
+      document.getElementById("save-button").addEventListener("click", sendDataToBackend);
     </script>
   </body>
 </html>
